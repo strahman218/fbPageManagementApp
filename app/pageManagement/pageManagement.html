@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="padded-content">
+
+            <h2 class="{{message.clazz}}" ng-model="message" ng-show="message.text.length > 0">{{message.text}}</h2>
+
+            <div ng-show="pages.length == 0">
+                Loading Pages!
+            </div>
+
+            <strong>Select a page:</strong>
+            <select ng-model="selected" ng-options="value as value.name for (key, value) in pageInfo.pages">
+                <option value="">Select a page</option>
+            </select>
+            <button class="btn-success" ng-click="getPageDetails()"> View </button>
+
+            <div ng-show="pagesLoaded">
+                <div ng-show="showPageDetails">
+                    <button class="button-invisible" ng-click="expandWritePost = !expandWritePost">
+                        <h3>
+                            Write a post
+                            <i class="material-icons" ng-show="!expandWritePost">arrow_drop_down</i>
+                            <i class="material-icons" ng-show="expandWritePost">arrow_drop_up</i>
+                        </h3>
+                    </button>
+
+                    <div class="writePostForm" ng-show="expandWritePost">
+                        <form>
+                            <textarea row="10" cols="70" ng-model="newPost.message">
+                                Enter content here...
+                            </textarea>
+
+                            <label for="publish"> Publish?</label>
+                            <input class="row" type="checkbox" id="publish" ng-model="newPost.publish" ng-change="newPost.scheduled = !newPost.publish"/>
+
+                            <label for="postTime">Schedule for later? </label>
+                            <input class="row" id="postTime" type="checkbox" ng-model="newPost.scheduled" ng-change="newPost.publish = !newPost.scheduled" />
+
+                            <input type="date" ng-model="newPost.scheduledTime.date" ng-disabled="!newPost.scheduled"/> at
+                            <input type="text" ng-model="newPost.scheduledTime.hour" placeholder="hour" ng-disabled="!newPost.scheduled"/> :
+                            <input class="col-xs-3" type="text" ng-model="newPost.scheduledTime.min" placeholder="minute" ng-disabled="!newPost.scheduled"/>
+
+                            <button class="btn-success" ng-click="createPost()">Post</button>
+                            <span ng-show="newPost.finishMessage.text.length > 0">
+                                <strong><h3 class="{{newPost.finishMessage.clazz}}">{{newPost.finishMessage.text}}</h3></strong>
+                            </span>
+                        </form>
+                        <br>
+                    </div>
+
+                    <div class="row">
+                        <h3>
+                            <button class="button-invisible" ng-click="expandTotalPosts = !expandTotalPosts">
+                                Total Posts ( {{selected.posts.pubCount + selected.posts.unpubCount}} )
+                                <i class="material-icons" ng-show="!expandTotalPosts">arrow_drop_down</i>
+                                <i class="material-icons" ng-show="expandTotalPosts">arrow_drop_up</i>
+                            </button>
+                        </h3>
+
+                        <div ng-show="expandTotalPosts">
+                            <div class="two-columns">
+                                <button class="button-invisible" ng-click="expandPublished = !expandPublished">
+                                    <h3>
+                                        Published posts ({{selected.posts.pubCount || 0}})
+                                        <i class="material-icons" ng-show="!expandPublished">arrow_drop_down</i>
+                                        <i class="material-icons" ng-show="expandPublished">arrow_drop_up</i>
+                                    </h3>
+                                </button>
+
+                                <ol class="feed">
+                                    <li ng-repeat="(key, value) in selected.posts.published " ng-show="expandPublished">
+                                        <small>{{value.createdTime | date: "MMM d, y HH:mm"}}</small>
+                                        <p>{{value.message}}</p>
+                                        <small>{{value.reached}} {{value.reached == 1 ? 'person' : 'people'}} reached</small>
+                                    </li>
+                                </ol>
+                            </div>
+
+
+                            <div class="two-columns">
+                            <button class="button-invisible" ng-click="expandUnpublished = !expandUnpublished">
+                                <h3>
+                                    Unpublished posts ({{selected.posts.unpubCount || 0}})
+                                    <i class="material-icons" ng-show="!expandUnpublished">arrow_drop_down</i>
+                                    <i class="material-icons" ng-show="expandUnpublished">arrow_drop_up</i>
+                                </h3>
+                            </button>
+
+
+                            <ol class="feed">
+                                <li ng-repeat="(key, value) in selected.posts.unpublished " ng-show="expandUnpublished">
+                                    <small>{{value.createdTime | date: "MMM d, y HH:mm"}}</small>
+                                    <p>{{value.message}}</p>
+                                    <small>{{value.reached}} {{value.reached == 1 ? 'person' : 'people'}} reached</small>
+                                </li>
+                            </ol>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

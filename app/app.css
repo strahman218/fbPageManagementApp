@@ -1,0 +1,168 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.three-columns {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+.two-columns{
+    float:left;
+    width: 50%;
+    padding: 10px;
+}
+
+.pull-left{
+    float:left;
+}
+.text-danger {
+    color: red;
+}
+
+.text-success {
+    color: green;
+}
+.padded-content{
+    background-color: #dfe3ee;
+    width: 95%;
+    border: 25px solid #dfe3ee;
+    padding: 25px;
+    margin: 35px;
+}
+
+.middle{
+    background-color: #dfe3ee;
+    padding: 10px;
+
+}
+
+input[type=text]{
+    width: 10%;
+}
+.feed{
+    width:800px;
+    list-style-type: none;
+    margin: 0 auto;
+    padding:20px;
+    margin-bottom:10px;
+    float: left;
+}
+
+.feed li{
+    width:600px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    webkit-border-radius:2px;
+    border:1px solid black;
+    padding:5px;
+    background-color:#FFF;
+    margin:-10px 0 20px 0;
+}
+
+select {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.writePostForm{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+/*input[type=textarea]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}*/
+
+.btn-success {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+form {
+    width:600px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    webkit-border-radius:2px;
+    border:1px solid black;
+    padding:5px;
+    background-color:#FFF;
+    margin:-10px 0 20px 0;
+}
+.center{
+    text-align: center
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.circle{
+	width: 50px;
+	height: 40px;
+	background: black;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+body{
+    background-color: #8b9dc3;
+}
+
+.button-invisible{
+    background: transparent;
+    border: none! important;
+}
